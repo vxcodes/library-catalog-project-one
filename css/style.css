@@ -1,0 +1,25 @@
+h1 {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3px;
+    width: 250px;
+    height: 150px;
+    margin: 5px;
+    border-radius: 7px;
+    border: 3px solid #000;
+}
+
+body{
+    background-image: ;
+
+img{
+    height: 700px;
+    width: 700px;
+}
