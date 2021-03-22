@@ -14,18 +14,27 @@
     <header>
         <h1>Library</h1>
     </header>
-    <main>
-        <section id="headlines">
+    <main id="myform">
         <form>
             <input type="text" placeholder="Book ID" />
-            <input type='submit' value="Get Book Info" />
+            <input type="submit" value="Get Book Info" />
         </form>
+        <h3>Highest Rating...</h3>
+        <section id="headlines"></section>
     </main>
-    <p id = "title"></p> 
-    <p id = "description"></p>
-    <!-- <p id = "author"></p>
-    <p id = "subjects"></p> -->
-    <p id = "covers"></p>
+    <div id="secondForm">
+        <form>
+            <input id = "reset" type="reset" value="reset"/>
+        </form>
+        <p id = "title"></p>
+        <p id = "description"></p>
+        <p id = "covers"></p>
+        <p id = "docs"></p>
+        <p id = "author_name"></p>
+        <p id = "publish_date"></p>
+        <p id = "publish_year"></p>
+        <!-- <img itemprop="image" src="//covers.openlibrary.org/b/id/1617898-M.jpg" srcset="//covers.openlibrary.org/b/id/1617898-L.jpg 2x" class="cover" alt="Cover of: The African American West | "> -->
+    </div>
     <footer>
         <p>All Rights Reserved Copyright &copy;  2021</p>
     </footer>
