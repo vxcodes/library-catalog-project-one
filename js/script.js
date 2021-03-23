@@ -37,10 +37,10 @@ function handleGetData(event) {
     // SUCCESS
     promise.then(
         (data) => {
-            console.log(data.docs[2].author_name[0])
+            //console.log(data.docs[2].author_name[0])
             console.log(data);
             headlines = data;
-            newFunc();
+            render();
             //$title.text(data.title);
             //$docs.text(data.docs)
             //$description.text(data.description);
@@ -80,20 +80,20 @@ function handleGetData(event) {
 
 
 
-function newFunc() {
-
-    const html = headlines.docs.map(function (launch) {
+function render() {
+    const html = headlines.docs.map(function (i) {
         for (let i=0;i<=10;i++){
             return `
                 <article class="card">
-                    <p>${headlines.docs[0].author_name[0]}</p>
-                    <p>${headlines.docs[0].title}</p>
-                    <p>${headlines.docs[0].publish_date[0]}</p>
-                    <p>${headlines.docs[0].publish_year[0]}</p>
+                    <p><img src="http://covers.openlibrary.org/b/isbn/${headlines.docs[i].isbn[0]}-S.jpg"/></p>
+                    <p>Author: ${headlines.docs[i].author_name[0]}</p>
+                    <p>Title: ${headlines.docs[i].title}</p>
+                    <p>Publish Date: ${headlines.docs[i].publish_date[0]}</p>
+                    <p>Publish Year: ${headlines.docs[i].publish_year[0]}</p>
                 </article>
             `;
 
-        }
+        };
     });
     $headlines.append(html);
 };
