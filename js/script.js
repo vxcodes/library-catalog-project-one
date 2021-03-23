@@ -1,4 +1,10 @@
 // constant variables - data that never changes
+const url_start = 'https://openlibrary.org/search.json?q=';
+// state variables - data that changes
+//let headlines;
+
+// caches element references - parts of the dom we need to touch
+let $input = $('input[type="text"]');
 const $headlines = $('#headlines');
 const $title = $('#title');
 const $description = $('#description');
@@ -7,23 +13,14 @@ const $docs = $("#docs");
 const $author_name = $("#author_name");
 const $publish_date = $("#publish_date");
 const $publish_year = $("#publish_year");
-
-// state variables - data that changes
-//let headlines;
-
-// caches element references - parts of the dom we need to touch
-
+const $resetBtn = $('#reset');
 // event listeners - capture and respond to events (i.e. user clicks on something)
+$resetBtn.on('click', handleReset);
+
+
+
 
 // functions - code that represents actions taken/carried out
-
-let $input = $('input[type="text"]');
-
-// init();
-
-// function init(){
-//     handleGetData();
-// };
 
 $('form').on('submit', handleGetData)
 
@@ -31,8 +28,8 @@ function handleGetData(event) {
     event.preventDefault();
     userInput = $input.val();
     const promise = $.ajax({
-        url: 'https://openlibrary.org/search.json?q=' + userInput + "'",
-        url_two: 'https://openlibrary.org/search/inside.json?q=' + userInput + "'",
+        url: url_start + userInput + "'",
+        //url_two: 'https://openlibrary.org/search/inside.json?q=' + userInput + "'",
     });
     // SUCCESS
     promise.then(
@@ -41,127 +38,35 @@ function handleGetData(event) {
             console.log(data);
             headlines = data;
             render();
-            //$title.text(data.title);
-            //$docs.text(data.docs)
-            //$description.text(data.description);
-
-        // for (i=0;i<10;i++){
-        //     $headlines.append(data.docs[i].author_name[0]);
-        //     $headlines.append(data.docs[i].title);
-        //     $headlines.append(data.docs[i].publish_date[0]);
-        //     $headlines.append(data.docs[i].publish_year[0]);
-        // }
-
             });
             (error) => {
                 console.log(error);
             };
     };
 
-// $('#secondForm').on('click', '#reset', function () {
-//     $(this).closest('p').remove();
-// });
-
-// function render(){
-
-//     $title = $('#title');
-//     //$description = $('#description');
-//     // $docs = $('#docs');
-//     $author_name = $('#author_name');
-//     $publish_date = $("#publish_date");
-//     $publish_year = $("publish_year");
-//     //$contributions = $('#contributions');
-//     //$author.text(data.authors["author"];)
-//     // $subjects.text(data.subjects);
-//     //$covers.text(data.covers[0]);
-// }
-
-// render()
-
 
 
 function render() {
+    let list = []
     const html = headlines.docs.map(function (i) {
         for (let i=0;i<=10;i++){
-            return `
-                <article class="card">
-                    <p><img src="http://covers.openlibrary.org/b/isbn/${headlines.docs[i].isbn[0]}-S.jpg"/></p>
-                    <p>Author: ${headlines.docs[i].author_name[0]}</p>
-                    <p>Title: ${headlines.docs[i].title}</p>
-                    <p>Publish Date: ${headlines.docs[i].publish_date[0]}</p>
-                    <p>Publish Year: ${headlines.docs[i].publish_year[0]}</p>
-                </article>
-            `;
+            
+            $headlines.append(`<article class="card">
+                <p><img src="http://covers.openlibrary.org/b/isbn/${headlines.docs[i].isbn[0]}-S.jpg"/></p>
+                <p>Author: ${headlines.docs[i].author_name[0]}</p>
+                <p>Title: ${headlines.docs[i].title}</p>
+                <p>Publish Date: ${headlines.docs[i].publish_date[0]}</p>
+                <p>Publish Year: ${headlines.docs[i].publish_year[0]}</p>
+            </article>`)
+            ;
 
         };
     });
-    $headlines.append(html);
+    // $headlines.append(html);
 };
 
-// function newFunc() {
-//     const html = headlines.docs.map(function() {
-//         //for (let key in headlines){
-//         for (let i = 0; i <= 10; i++) {
-//             return `
-//                 <article class="card">
-
-//                     <p>${headlines.docs[i].author_name[0]}</p>
-//                     <p>${headlines.docs[i].title}</p>
-//                     <p>${headlines.docs[i].publish_date[0]}</p>
-//                     <p>${headlines.docs[i].publish_year[0]}</p>
-//                 </article>
-//             `
-//         };
-
-//     });
-//     $headlines.append(html);
-// };
 
 
-
-// <p>${headlines.docs[key].author_name[0]}</p>
-// <p>${headlines.docs[key].title}</p>
-// <p>${headlines.docs[key].publish_date[0]}</p>
-// <p>${headlines.docs[key].publish_year[0]}</p>
-
-//newFunc();
-// init();
-// function init(){
-//     getData();
-// };
-// note: AJAX is running asynchronously while the rest of JS is running synchronously.
-// function getData(){
-//         // SUCCESS
-//         promise.then(
-//             (data) => {
-//                 console.log(data)
-//                 $title.text(data.title);
-//                 $description.text(data.description);
-//                 //$author.text(data.authors["author"];)
-//                 // $subjects.text(data.subjects);
-//                 $covers.text(data.covers[0]);
-
-
-//             //$description.text(data)
-//         // FAILURE
-//         }, function (error) {
-//             console.log(error);
-//         });
-// };
-
-
-
-// function render(){
-//     const html = headlines.map(function(headings){
-//         return`
-//             <article class="card">
-//                 <h1>${headings.title}</h1>
-//                 <p>${headings.description}</p>
-//                 <p>${headings.covers}</p>
-//             </article>
-//         `;
-//     });
-//     $headlines.append(html);
-// };
-
-// render()
+function handleReset() {
+    $('article').remove()
+};
