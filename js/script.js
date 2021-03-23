@@ -1,4 +1,4 @@
-let headlines;
+// constant variables - data that never changes
 const $headlines = $('#headlines');
 const $title = $('#title');
 const $description = $('#description');
@@ -8,43 +8,59 @@ const $author_name = $("#author_name");
 const $publish_date = $("#publish_date");
 const $publish_year = $("#publish_year");
 
+// state variables - data that changes
+//let headlines;
+
+// caches element references - parts of the dom we need to touch
+
+// event listeners - capture and respond to events (i.e. user clicks on something)
+
+// functions - code that represents actions taken/carried out
+
 let $input = $('input[type="text"]');
 
+// init();
+
+// function init(){
+//     handleGetData();
+// };
 
 $('form').on('submit', handleGetData)
 
-function handleGetData(event){
+function handleGetData(event) {
     event.preventDefault();
     userInput = $input.val();
     const promise = $.ajax({
-        url: 'https://openlibrary.org/search.json?q='+userInput+"'",
-        url_two: 'https://openlibrary.org/search/inside.json?q='+userInput+"'"
+        url: 'https://openlibrary.org/search.json?q=' + userInput + "'",
+        url_two: 'https://openlibrary.org/search/inside.json?q=' + userInput + "'",
     });
     // SUCCESS
     promise.then(
-    (data) => {
-        console.log(data)
-        //$title.text(data.title);
-        //$docs.text(data.docs)
-        //$description.text(data.description);
+        (data) => {
+            console.log(data.docs[2].author_name[0])
+            console.log(data);
+            headlines = data;
+            newFunc();
+            //$title.text(data.title);
+            //$docs.text(data.docs)
+            //$description.text(data.description);
 
-        for (i=0;i<10;i++){
-            $headlines.append(data.docs[i].author_name[0]);
-            $headlines.append(data.docs[i].title);
-            $headlines.append(data.docs[i].publish_date[0]);
-            $headlines.append(data.docs[i].publish_year[0]);
-        }
-        $covers.text(data.covers[0]);
-    // FAILURE
-    }, 
-    (error) => {
-        console.log(error);
-    });
-};
+        // for (i=0;i<10;i++){
+        //     $headlines.append(data.docs[i].author_name[0]);
+        //     $headlines.append(data.docs[i].title);
+        //     $headlines.append(data.docs[i].publish_date[0]);
+        //     $headlines.append(data.docs[i].publish_year[0]);
+        // }
 
-$('#secondForm').on('click','#reset', function(){
-    $(this).closest('p').remove();
-});
+            });
+            (error) => {
+                console.log(error);
+            };
+    };
+
+// $('#secondForm').on('click', '#reset', function () {
+//     $(this).closest('p').remove();
+// });
 
 // function render(){
 
@@ -63,18 +79,52 @@ $('#secondForm').on('click','#reset', function(){
 // render()
 
 
+
 function newFunc() {
-    const html = headlines.map(function(launch) {
-        return `
-            <article class="card">
-                <h1>${launch.description}</h1>
-                <p>${launch.title}</p>
-            </article>
-        `;
+
+    const html = headlines.docs.map(function (launch) {
+        for (let i=0;i<=10;i++){
+            return `
+                <article class="card">
+                    <p>${headlines.docs[0].author_name[0]}</p>
+                    <p>${headlines.docs[0].title}</p>
+                    <p>${headlines.docs[0].publish_date[0]}</p>
+                    <p>${headlines.docs[0].publish_year[0]}</p>
+                </article>
+            `;
+
+        }
     });
     $headlines.append(html);
-}
-newFunc();
+};
+
+// function newFunc() {
+//     const html = headlines.docs.map(function() {
+//         //for (let key in headlines){
+//         for (let i = 0; i <= 10; i++) {
+//             return `
+//                 <article class="card">
+
+//                     <p>${headlines.docs[i].author_name[0]}</p>
+//                     <p>${headlines.docs[i].title}</p>
+//                     <p>${headlines.docs[i].publish_date[0]}</p>
+//                     <p>${headlines.docs[i].publish_year[0]}</p>
+//                 </article>
+//             `
+//         };
+
+//     });
+//     $headlines.append(html);
+// };
+
+
+
+// <p>${headlines.docs[key].author_name[0]}</p>
+// <p>${headlines.docs[key].title}</p>
+// <p>${headlines.docs[key].publish_date[0]}</p>
+// <p>${headlines.docs[key].publish_year[0]}</p>
+
+//newFunc();
 // init();
 // function init(){
 //     getData();
@@ -114,4 +164,4 @@ newFunc();
 //     $headlines.append(html);
 // };
 
-// render();
+// render()
