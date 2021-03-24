@@ -15,3 +15,7 @@ A simple web app that visualizes the openlibrary API data. The user is able to s
 ## Getting Started
 [Click here]() to get started
 ## Future Enhancements
+- Write function to enable "learn more" button to render books to dom automatically. 
+- Create a homepage with most popular book titles.
+- Allow users to favorite titles
+- Create a navigation bar which allows user to browse different subjects and view their favorites
