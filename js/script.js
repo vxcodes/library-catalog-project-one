@@ -1,6 +1,8 @@
 
 // constant variables - data that never changes
 const url_start = 'https://openlibrary.org/search.json?q=';
+const url1 = "https://openlibrary.org/books/OL7353617M";
+const url2 = "https://openlibrary.org/books/OL31905190M";
 // state variables - data that changes
 let headlines;
 let infoDesired;
@@ -18,9 +20,15 @@ const $publish_year = $('#publish_year');
 const $resetBtn = $('#reset');
 const $input = $('input[type="text"]');
 const $span = $('#year');
+const $learnMoreOne = $('#learnMoreOne');
+const $learnMoreTwo = $('#learnMoreTwo');
+const $aBook = $("#aBook");
+
 // event listeners - capture and respond to events (i.e. user clicks on something)
 $('form').on('submit', handleGetData);
 $resetBtn.on('click', handleReset);
+// $learnMoreOne.on('click',reDirect(url1));
+// $learnMoreTwo.on('click', reDirect(url2));
 // functions - code that represents actions taken/carried out
 $span.text(year);
 function handleGetData(event) {
@@ -53,22 +61,28 @@ function render() {
     });
     // console.log(infoDesired)
     // if articles already exist on the DOM, remove them
+
     $('article').remove();
     infoDesired.forEach(function (book) {
         if(book.first_publish_year === undefined) {
             book.first_publish_year = "No data available"
         }
-        const $article = $(`<article class="card">
+        const $article = $(`<button id="aBook"><article class="card">
             <p><img src="http://covers.openlibrary.org/b/olid/${book.edition_key[0]}-S.jpg"/></p>
             <p>${book.title}</p>
             <p>${book.author_name}</p>
             <p>${book.first_publish_year}</p>
-        </article>`);
+        </article></button>`);
         $headlines.append($article);
     });
 }
 function handleReset() {
     $('article').remove()
-}
+};
 
+
+
+// function reDirect(aLink){
+//     window.location.replace(aLink)
+// };
 
