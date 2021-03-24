@@ -13,7 +13,7 @@ A simple web app that visualizes the openlibrary API data. The user is able to s
 ![wireframe](./wireframe.png)
 
 ## Getting Started
-[Click here]() to get started
+[Click here](https://vxcodes.github.io/library-catalog-project-one/#) to get started
 ## Future Enhancements
 - Write function to enable "learn more" button to render books to dom automatically. 
 - Create a homepage with most popular book titles.
