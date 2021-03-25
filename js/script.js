@@ -66,12 +66,12 @@ function render() {
         if(book.first_publish_year === undefined) {
             book.first_publish_year = "No data available"
         }
-        const $article = $(`<button id="aBook"><article class="card">
+        const $article = $(`<article class="card">
             <p><img src="http://covers.openlibrary.org/b/olid/${book.edition_key[0]}-S.jpg"/></p>
             <p>${book.title}</p>
             <p>${book.author_name}</p>
             <p>${book.first_publish_year}</p>
-        </article></button>`);
+        </article>`);
         $headlines.append($article);
     });
 }
