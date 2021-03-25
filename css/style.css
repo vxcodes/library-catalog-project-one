@@ -16,12 +16,13 @@ header, footer {
 }
 header {
     padding-left: 15px;
-    background-color: rgb(77, 117, 155);
+    background-color: rgb(15, 1, 1);
     color: #fff;
     box-shadow: 1px 1px 3px 2px #dfd5d5;
 }
 main {
     flex-grow: 1;
+
 }
 footer {
     justify-content: center;

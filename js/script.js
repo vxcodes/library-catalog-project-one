@@ -27,8 +27,8 @@ const $aBook = $("#aBook");
 // event listeners - capture and respond to events (i.e. user clicks on something)
 $('form').on('submit', handleGetData);
 $resetBtn.on('click', handleReset);
-// $learnMoreOne.on('click',reDirect(url1));
-// $learnMoreTwo.on('click', reDirect(url2));
+$learnMoreOne.on('click',reDirect(url1));
+$learnMoreTwo.on('click', reDirect(url2));
 // functions - code that represents actions taken/carried out
 $span.text(year);
 function handleGetData(event) {
@@ -40,7 +40,6 @@ function handleGetData(event) {
     });
     // SUCCESS
     promise.then(data => {
-        // console.log(data.docs[2].author_name[0]);
         // console.log(data);
         headlines = data;
         render();
@@ -82,7 +81,8 @@ function handleReset() {
 
 
 
-// function reDirect(aLink){
-//     window.location.replace(aLink)
-// };
+function reDirect(event,aLink){
+    event.preventDefault();
+    window.location.replace(aLink)
+};
 
